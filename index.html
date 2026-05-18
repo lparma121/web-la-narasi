@@ -1,277 +1,286 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Generator Laporan Atensi & Narasi Berita</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+<title>Generator Atensi</title>
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<style>
 
-    body{
-      background:#f1f5f9;
-      padding:30px;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    padding:30px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:420px 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    margin-bottom:20px;
+    color:#0f172a;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    font-size:14px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background:#0f172a;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1e293b;
+}
+
+.preview{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.frame{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    margin:auto;
+}
+
+.frame img.bg{
+    width:100%;
+    display:block;
+}
+
+.photo-container{
+    position:absolute;
+    top:13%;
+    left:5%;
+    width:90%;
+    height:73%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    padding:10px;
+}
+
+.photo-container img{
+    object-fit:cover;
+    border-radius:12px;
+    border:4px solid white;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+
+.one img{
+    width:100%;
+    height:100%;
+}
+
+.two img{
+    width:48%;
+    height:100%;
+}
+
+.three img{
+    width:48%;
+    height:48%;
+}
+
+.four img{
+    width:48%;
+    height:48%;
+}
+
+.five img{
+    width:30%;
+    height:48%;
+}
+
+.output{
+    margin-top:30px;
+    white-space:pre-wrap;
+    line-height:1.8;
+    font-size:15px;
+}
+
+@media(max-width:900px){
 
     .container{
-      max-width:1400px;
-      margin:auto;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:20px;
-    }
-
-    .card{
-      background:white;
-      padding:25px;
-      border-radius:14px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    h1{
-      margin-bottom:20px;
-      color:#0f172a;
-    }
-
-    label{
-      display:block;
-      margin-top:15px;
-      margin-bottom:8px;
-      font-weight:bold;
-    }
-
-    input,
-    textarea,
-    select{
-      width:100%;
-      padding:12px;
-      border-radius:8px;
-      border:1px solid #cbd5e1;
-      font-size:14px;
-    }
-
-    textarea{
-      min-height:100px;
-      resize:vertical;
-    }
-
-    button{
-      width:100%;
-      padding:14px;
-      margin-top:20px;
-      border:none;
-      border-radius:10px;
-      background:#0f172a;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-    }
-
-    button:hover{
-      background:#1e293b;
-    }
-
-    .output{
-      white-space:pre-wrap;
-      line-height:1.8;
-      font-size:15px;
-    }
-
-    .section-title{
-      font-size:20px;
-      font-weight:bold;
-      margin-bottom:20px;
-      color:#0f172a;
-    }
-
-    hr{
-      margin:30px 0;
-      border:none;
-      border-top:1px solid #cbd5e1;
-    }
-
-    @media(max-width:900px){
-      .container{
         grid-template-columns:1fr;
-      }
     }
 
-  </style>
+}
+
+</style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- FORM -->
-  <div class="card">
+    <!-- FORM -->
+    <div class="card">
 
-    <h1>Generator Laporan Atensi</h1>
+        <h1>Generator Atensi</h1>
 
-    <label>Judul Kegiatan</label>
-    <input type="text" id="judul">
+        <label>Judul Kegiatan</label>
+        <input type="text" id="judul">
 
-    <label>Hari / Tanggal</label>
-    <input type="text" id="tanggal" placeholder="Rabu, 13 Mei 2026">
+        <label>Tanggal</label>
+        <input type="text" id="tanggal">
 
-    <label>Pukul</label>
-    <input type="text" id="pukul" placeholder="09.00 WIB s.d selesai">
+        <label>Pukul</label>
+        <input type="text" id="pukul">
 
-    <label>Tempat</label>
-    <input type="text" id="tempat">
+        <label>Tempat</label>
+        <input type="text" id="tempat">
 
-    <label>Jenis Kegiatan</label>
-    <select id="jenis">
-      <option value="pengamanan">Pengamanan</option>
-      <option value="sosialisasi">Sosialisasi</option>
-      <option value="monitoring">Monitoring</option>
-      <option value="rapat">Rapat</option>
-      <option value="zoom">Zoom Meeting</option>
-      <option value="pembinaan">Pembinaan</option>
-    </select>
+        <label>Peserta</label>
+        <textarea id="peserta"></textarea>
 
-    <label>Peserta Kegiatan</label>
-    <textarea id="peserta" placeholder="Satu peserta satu baris"></textarea>
+        <label>Uraian Singkat</label>
+        <textarea id="uraian"></textarea>
 
-    <label>Uraian Singkat</label>
-    <textarea id="uraian" placeholder="Contoh: Kalapas melakukan kontrol area blok hunian untuk memastikan keamanan dan ketertiban warga binaan."></textarea>
+        <label>Upload Foto</label>
+        <input type="file" id="fotoInput" multiple accept="image/*">
 
-    <button onclick="generateLaporan()">
-      Generate Laporan & Narasi
-    </button>
+        <button onclick="generateLaporan()">
+            Generate
+        </button>
 
-  </div>
-
-  <!-- OUTPUT -->
-  <div class="card">
-
-    <div class="section-title">
-      HASIL GENERATOR
     </div>
 
-    <div class="output" id="hasil">
-      Hasil laporan akan muncul di sini...
-    </div>
+    <!-- PREVIEW -->
+    <div class="preview">
 
-  </div>
+        <!-- FRAME -->
+        <div class="frame">
+
+            <!-- GANTI FRAME.PNG DENGAN NAMA FILE FRAME KAMU -->
+            <img src="format.png" class="bg">
+
+            <div class="photo-container" id="photoContainer"></div>
+
+        </div>
+
+        <!-- HASIL -->
+        <div class="output" id="hasil"></div>
+
+    </div>
 
 </div>
 
 <script>
 
-function generateSaran(jenis){
+const fotoInput = document.getElementById("fotoInput");
+const photoContainer = document.getElementById("photoContainer");
 
-  if(jenis === "pengamanan"){
-    return `
-1. Meningkatkan intensitas kontrol dan monitoring area secara rutin;
-2. Memperkuat pengawasan dan deteksi dini terhadap potensi gangguan keamanan dan ketertiban;
-3. Meningkatkan koordinasi antar petugas pengamanan dalam pelaksanaan tugas;
-4. Memberikan pembinaan dan imbauan kepada warga binaan agar tetap menjaga ketertiban;
-5. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
-6. Mohon arahan dan petunjuk lebih lanjut.
-`;
-  }
+fotoInput.addEventListener("change", function(){
 
-  if(jenis === "sosialisasi"){
-    return `
-1. Meningkatkan pemahaman dan kesadaran pegawai terkait materi yang telah disampaikan;
-2. Mengoptimalkan pelaksanaan kegiatan sosialisasi secara berkelanjutan;
-3. Melaksanakan evaluasi terhadap hasil kegiatan yang telah dilaksanakan;
-4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
-5. Mohon arahan dan petunjuk pimpinan untuk peningkatan kegiatan selanjutnya.
-`;
-  }
+    photoContainer.innerHTML = "";
 
-  return `
-1. Meningkatkan koordinasi dan komunikasi antar petugas;
-2. Mengoptimalkan pelaksanaan kegiatan secara rutin dan berkelanjutan;
-3. Melaporkan hasil kegiatan kepada pimpinan;
-4. Mohon arahan dan petunjuk lebih lanjut.
-`;
-}
+    const files = this.files;
 
-function generateKesimpulan(jenis){
+    photoContainer.className = "photo-container";
 
-  if(jenis === "pengamanan"){
-    return `
-Kegiatan berjalan dengan aman, tertib, lancar, dan kondusif serta menjadi bentuk komitmen dalam menjaga stabilitas keamanan dan ketertiban di lingkungan Lapas.
-`;
-  }
+    if(files.length == 1){
+        photoContainer.classList.add("one");
+    }
 
-  if(jenis === "sosialisasi"){
-    return `
-Kegiatan sosialisasi terlaksana dengan baik dan lancar serta memberikan pemahaman dan peningkatan wawasan kepada peserta kegiatan.
-`;
-  }
+    else if(files.length == 2){
+        photoContainer.classList.add("two");
+    }
 
-  return `
-Kegiatan berjalan dengan baik, aman, tertib, dan lancar sesuai dengan tujuan pelaksanaan kegiatan.
-`;
-}
+    else if(files.length == 3){
+        photoContainer.classList.add("three");
+    }
 
-function generateUraian(judul, uraian, tempat){
+    else if(files.length == 4){
+        photoContainer.classList.add("four");
+    }
 
-  return `
-Pada kegiatan ${judul}, petugas melaksanakan kegiatan di ${tempat} sebagai bentuk pelaksanaan tugas dan fungsi pemasyarakatan sesuai dengan ketentuan yang berlaku.
+    else{
+        photoContainer.classList.add("five");
+    }
 
-Kegiatan tersebut dilaksanakan dalam rangka meningkatkan efektivitas pelaksanaan tugas, pengawasan, koordinasi, serta pelayanan di lingkungan Lapas Kelas IIB Arga Makmur.
+    Array.from(files).forEach(file => {
 
-Dalam pelaksanaannya, kegiatan berlangsung dengan tertib dan kondusif. ${uraian}
+        const reader = new FileReader();
 
-Selain itu, petugas juga melakukan monitoring dan koordinasi guna memastikan seluruh rangkaian kegiatan berjalan sesuai prosedur dan ketentuan yang berlaku di lingkungan pemasyarakatan.
+        reader.onload = function(e){
 
-Selama kegiatan berlangsung, situasi terpantau aman, lancar, tertib, dan kondusif.
-`;
-}
+            const img = document.createElement("img");
 
-function generateBerita(judul, tanggal, tempat, uraian){
+            img.src = e.target.result;
 
-  return `
-NARASI BERITA
+            photoContainer.appendChild(img);
 
-Arga Makmur — Lapas Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} pada ${tanggal} bertempat di ${tempat}.
+        }
 
-Kegiatan ini dilaksanakan sebagai bentuk komitmen dalam meningkatkan pelaksanaan tugas dan fungsi pemasyarakatan, sekaligus menjaga situasi yang aman, tertib, dan kondusif di lingkungan Lapas.
+        reader.readAsDataURL(file);
 
-Dalam pelaksanaannya, kegiatan berlangsung dengan tertib dan lancar. ${uraian}
+    });
 
-Petugas juga melakukan monitoring serta koordinasi guna memastikan seluruh rangkaian kegiatan berjalan sesuai prosedur dan ketentuan yang berlaku.
-
-Melalui kegiatan ini diharapkan dapat meningkatkan efektivitas pelaksanaan tugas, memperkuat koordinasi antar petugas, serta menciptakan lingkungan pemasyarakatan yang aman dan kondusif.
-
-Kegiatan berjalan aman, tertib, dan mendapat respon positif dari seluruh peserta yang hadir.
-`;
-}
+});
 
 function generateLaporan(){
 
-  const judul = document.getElementById("judul").value;
-  const tanggal = document.getElementById("tanggal").value;
-  const pukul = document.getElementById("pukul").value;
-  const tempat = document.getElementById("tempat").value;
-  const jenis = document.getElementById("jenis").value;
-  const pesertaInput = document.getElementById("peserta").value;
-  const uraian = document.getElementById("uraian").value;
+    const judul = document.getElementById("judul").value;
+    const tanggal = document.getElementById("tanggal").value;
+    const pukul = document.getElementById("pukul").value;
+    const tempat = document.getElementById("tempat").value;
+    const peserta = document.getElementById("peserta").value;
+    const uraian = document.getElementById("uraian").value;
 
-  const pesertaArray = pesertaInput.split("\n");
-
-  let pesertaFormatted = "";
-
-  pesertaArray.forEach((item, index)=>{
-
-    if(item.trim() !== ""){
-      pesertaFormatted += `${index + 1}. ${item}\n`;
-    }
-
-  });
-
-  const laporan = `
-                         LAPORAN ATENSI PIMPINAN
+    const hasil = `
+LAPORAN ATENSI PIMPINAN
 
 Kepada Yth.
 Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
@@ -288,31 +297,25 @@ ${judul}
 II. WAKTU KEGIATAN
 
 Hari/Tanggal : ${tanggal}
-Pukul         : ${pukul}
-Tempat        : ${tempat}
+Pukul : ${pukul}
+Tempat : ${tempat}
 
 
 III. PESERTA KEGIATAN
 
-${pesertaFormatted}
+${peserta}
 
 
 IV. URAIAN KEGIATAN
 
-${generateUraian(judul, uraian, tempat)}
+Pada kegiatan ${judul}, petugas melaksanakan kegiatan di ${tempat} sebagai bentuk pelaksanaan tugas dan fungsi pemasyarakatan.
+
+${uraian}
+
+Kegiatan berlangsung dengan aman, tertib, dan kondusif.
 
 
-V. SARAN DAN TINDAK LANJUT
-
-${generateSaran(jenis)}
-
-
-VI. KESIMPULAN
-
-${generateKesimpulan(jenis)}
-
-
-VII. PENUTUP
+V. PENUTUP
 
 Demikian laporan atensi ini disampaikan. Atas perhatian dan perkenannya diucapkan terima kasih.
 
@@ -323,17 +326,24 @@ Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
 
 
 YULIAN FERNANDO
+
+
+
+======================================================
+
+NARASI BERITA
+
+${judul}
+
+Arga Makmur — Lapas Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} pada ${tanggal} bertempat di ${tempat}.
+
+${uraian}
+
+Kegiatan berlangsung dengan aman, tertib, dan lancar serta menjadi bentuk komitmen dalam meningkatkan kualitas pelaksanaan tugas dan fungsi pemasyarakatan.
+
 `;
 
-  const berita = generateBerita(
-    judul,
-    tanggal,
-    tempat,
-    uraian
-  );
-
-  document.getElementById("hasil").innerText =
-    laporan + "\n\n====================================================\n\n" + berita;
+    document.getElementById("hasil").innerText = hasil;
 
 }
 
