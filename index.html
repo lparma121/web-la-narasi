@@ -70,6 +70,11 @@ button{
     color:white;
     font-size:15px;
     cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    opacity:0.9;
 }
 
 .generate-btn{
@@ -82,10 +87,6 @@ button{
 
 .download-btn{
     background:#2563eb;
-}
-
-button:hover{
-    opacity:0.9;
 }
 
 .preview{
@@ -223,15 +224,17 @@ button:hover{
         <!-- FRAME -->
         <div class="frame">
 
-            <!-- GANTI DENGAN NAMA FILE FRAME KAMU -->
+            <!-- GANTI DENGAN FILE FRAME KAMU -->
             <img src="format.png" class="bg">
 
             <div class="photo-container" id="photoContainer"></div>
 
         </div>
 
-        <!-- OUTPUT -->
-        <div class="output" id="hasil"></div>
+        <!-- HASIL -->
+        <div class="output" id="hasil">
+Hasil laporan akan muncul di sini...
+        </div>
 
         <!-- BUTTON -->
         <div class="btn-group">
@@ -305,14 +308,14 @@ fotoInput.addEventListener("change", function(){
 
 function generateSaran(judul){
 
-    const lowerJudul = judul.toLowerCase();
+    const text = judul.toLowerCase();
 
     if(
-        lowerJudul.includes("kontrol") ||
-        lowerJudul.includes("pengamanan") ||
-        lowerJudul.includes("razia") ||
-        lowerJudul.includes("blok") ||
-        lowerJudul.includes("dapur")
+        text.includes("kontrol") ||
+        text.includes("blok") ||
+        text.includes("dapur") ||
+        text.includes("pengamanan") ||
+        text.includes("razia")
     ){
 
         return `
@@ -327,11 +330,10 @@ function generateSaran(judul){
     }
 
     else if(
-        lowerJudul.includes("sosialisasi") ||
-        lowerJudul.includes("edukasi") ||
-        lowerJudul.includes("zoom") ||
-        lowerJudul.includes("penyuluhan") ||
-        lowerJudul.includes("keuangan")
+        text.includes("sosialisasi") ||
+        text.includes("edukasi") ||
+        text.includes("zoom") ||
+        text.includes("keuangan")
     ){
 
         return `
@@ -345,10 +347,9 @@ function generateSaran(judul){
     }
 
     else if(
-        lowerJudul.includes("ujian") ||
-        lowerJudul.includes("pendidikan") ||
-        lowerJudul.includes("kesetaraan") ||
-        lowerJudul.includes("paket")
+        text.includes("ujian") ||
+        text.includes("pendidikan") ||
+        text.includes("kesetaraan")
     ){
 
         return `
@@ -361,17 +362,13 @@ function generateSaran(judul){
 
     }
 
-    else{
-
-        return `
+    return `
 1. Meningkatkan koordinasi dan komunikasi antar petugas dalam pelaksanaan kegiatan;
 2. Mengoptimalkan pengawasan dan monitoring terhadap pelaksanaan kegiatan secara berkala;
 3. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan tugas;
 4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
 5. Mohon arahan dan petunjuk lebih lanjut.
 `;
-
-    }
 
 }
 
@@ -450,7 +447,7 @@ ${generateUraian(judul, tempat, uraian)}
 
 V. SARAN DAN TINDAK LANJUT
 
-${generateSaran(judul)}
+${generateSaran(judul).trim()}
 
 
 VI. KESIMPULAN
@@ -497,15 +494,21 @@ function downloadTXT(){
 
     const text = document.getElementById("hasil").innerText;
 
-    const blob = new Blob([text], {type:"text/plain"});
+    const blob = new Blob([text], {
+        type:"text/plain"
+    });
 
-    const a = document.createElement("a");
+    const link = document.createElement("a");
 
-    a.href = URL.createObjectURL(blob);
+    link.href = URL.createObjectURL(blob);
 
-    a.download = "laporan-atensi.txt";
+    link.download = "laporan-atensi.txt";
 
-    a.click();
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
 
 }
 
