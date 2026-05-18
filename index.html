@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generator Atensi</title>
+<title>Generator Laporan Atensi</title>
 
 <style>
 
@@ -48,8 +48,7 @@ label{
 }
 
 input,
-textarea,
-select{
+textarea{
     width:100%;
     padding:12px;
     border-radius:8px;
@@ -65,17 +64,28 @@ textarea{
 button{
     width:100%;
     padding:14px;
-    margin-top:20px;
+    margin-top:15px;
     border:none;
     border-radius:10px;
-    background:#0f172a;
     color:white;
-    font-size:16px;
+    font-size:15px;
     cursor:pointer;
 }
 
+.generate-btn{
+    background:#0f172a;
+}
+
+.copy-btn{
+    background:#16a34a;
+}
+
+.download-btn{
+    background:#2563eb;
+}
+
 button:hover{
-    background:#1e293b;
+    opacity:0.9;
 }
 
 .preview{
@@ -151,10 +161,20 @@ button:hover{
     font-size:15px;
 }
 
+.btn-group{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
 @media(max-width:900px){
 
     .container{
         grid-template-columns:1fr;
+    }
+
+    .btn-group{
+        flex-direction:column;
     }
 
 }
@@ -168,21 +188,21 @@ button:hover{
     <!-- FORM -->
     <div class="card">
 
-        <h1>Generator Atensi</h1>
+        <h1>Generator Laporan Atensi</h1>
 
         <label>Judul Kegiatan</label>
         <input type="text" id="judul">
 
         <label>Tanggal</label>
-        <input type="text" id="tanggal">
+        <input type="text" id="tanggal" placeholder="Rabu, 13 Mei 2026">
 
         <label>Pukul</label>
-        <input type="text" id="pukul">
+        <input type="text" id="pukul" placeholder="09.00 WIB s.d selesai">
 
         <label>Tempat</label>
         <input type="text" id="tempat">
 
-        <label>Peserta</label>
+        <label>Peserta Kegiatan</label>
         <textarea id="peserta"></textarea>
 
         <label>Uraian Singkat</label>
@@ -191,8 +211,8 @@ button:hover{
         <label>Upload Foto</label>
         <input type="file" id="fotoInput" multiple accept="image/*">
 
-        <button onclick="generateLaporan()">
-            Generate
+        <button class="generate-btn" onclick="generateLaporan()">
+            Generate Laporan
         </button>
 
     </div>
@@ -203,15 +223,28 @@ button:hover{
         <!-- FRAME -->
         <div class="frame">
 
-            <!-- GANTI FRAME.PNG DENGAN NAMA FILE FRAME KAMU -->
+            <!-- GANTI DENGAN NAMA FILE FRAME KAMU -->
             <img src="format.png" class="bg">
 
             <div class="photo-container" id="photoContainer"></div>
 
         </div>
 
-        <!-- HASIL -->
+        <!-- OUTPUT -->
         <div class="output" id="hasil"></div>
+
+        <!-- BUTTON -->
+        <div class="btn-group">
+
+            <button class="copy-btn" onclick="copyLaporan()">
+                Copy Laporan
+            </button>
+
+            <button class="download-btn" onclick="downloadTXT()">
+                Download TXT
+            </button>
+
+        </div>
 
     </div>
 
@@ -270,6 +303,110 @@ fotoInput.addEventListener("change", function(){
 
 });
 
+function generateSaran(judul){
+
+    const lowerJudul = judul.toLowerCase();
+
+    if(
+        lowerJudul.includes("kontrol") ||
+        lowerJudul.includes("pengamanan") ||
+        lowerJudul.includes("razia") ||
+        lowerJudul.includes("blok") ||
+        lowerJudul.includes("dapur")
+    ){
+
+        return `
+1. Meningkatkan intensitas kontrol dan monitoring area kegiatan secara rutin;
+2. Memperkuat pengawasan dan deteksi dini terhadap potensi gangguan keamanan dan ketertiban;
+3. Meningkatkan koordinasi antar petugas dalam pelaksanaan tugas pengamanan dan pengawasan;
+4. Memberikan pembinaan dan imbauan kepada warga binaan agar tetap menjaga ketertiban;
+5. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+6. Mohon arahan dan petunjuk lebih lanjut.
+`;
+
+    }
+
+    else if(
+        lowerJudul.includes("sosialisasi") ||
+        lowerJudul.includes("edukasi") ||
+        lowerJudul.includes("zoom") ||
+        lowerJudul.includes("penyuluhan") ||
+        lowerJudul.includes("keuangan")
+    ){
+
+        return `
+1. Kalapas Arga Makmur akan melaporkan pelaksanaan kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+2. Lapas Kelas IIB Arga Makmur akan meningkatkan pemahaman dan kesadaran pegawai terkait materi kegiatan yang telah disampaikan;
+3. Mengoptimalkan pelaksanaan kegiatan sosialisasi dan edukasi secara berkelanjutan;
+4. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan kegiatan selanjutnya;
+5. Mohon arahan dan petunjuk pimpinan untuk peningkatan pelaksanaan kegiatan selanjutnya.
+`;
+
+    }
+
+    else if(
+        lowerJudul.includes("ujian") ||
+        lowerJudul.includes("pendidikan") ||
+        lowerJudul.includes("kesetaraan") ||
+        lowerJudul.includes("paket")
+    ){
+
+        return `
+1. Meningkatkan koordinasi dengan pihak terkait dalam pelaksanaan program pendidikan warga binaan;
+2. Mengoptimalkan pembinaan pendidikan guna meningkatkan kualitas sumber daya manusia warga binaan;
+3. Melaksanakan evaluasi terhadap hasil kegiatan pendidikan secara berkala;
+4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+5. Mohon arahan dan petunjuk lebih lanjut untuk peningkatan pelaksanaan program pembinaan pendidikan.
+`;
+
+    }
+
+    else{
+
+        return `
+1. Meningkatkan koordinasi dan komunikasi antar petugas dalam pelaksanaan kegiatan;
+2. Mengoptimalkan pengawasan dan monitoring terhadap pelaksanaan kegiatan secara berkala;
+3. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan tugas;
+4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+5. Mohon arahan dan petunjuk lebih lanjut.
+`;
+
+    }
+
+}
+
+function generateUraian(judul, tempat, uraian){
+
+    return `
+Pada hari pelaksanaan kegiatan, petugas Lapas Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} yang bertempat di ${tempat}. Kegiatan tersebut dilaksanakan sebagai bentuk pelaksanaan tugas dan fungsi pemasyarakatan dalam rangka meningkatkan kualitas pelayanan, pengawasan, serta pembinaan di lingkungan Lapas.
+
+Dalam pelaksanaannya, kegiatan diawali dengan persiapan dan koordinasi antar petugas guna memastikan seluruh rangkaian kegiatan dapat berjalan sesuai dengan prosedur dan ketentuan yang berlaku. Petugas juga melakukan monitoring secara langsung terhadap jalannya kegiatan untuk memastikan situasi tetap aman dan kondusif.
+
+${uraian} Selain itu, kegiatan ini juga menjadi bagian dari upaya peningkatan kedisiplinan, pengawasan, dan efektivitas pelaksanaan tugas di lingkungan Lapas Kelas IIB Arga Makmur agar seluruh proses pelayanan maupun pembinaan dapat berjalan optimal.
+
+Selama kegiatan berlangsung, seluruh peserta mengikuti rangkaian kegiatan dengan tertib dan penuh tanggung jawab. Situasi selama kegiatan terpantau aman, lancar, tertib, dan kondusif hingga kegiatan selesai dilaksanakan.
+`;
+
+}
+
+function generateNarasi(judul, tanggal, tempat, uraian){
+
+    return `
+${judul}
+
+Arga Makmur — Lembaga Pemasyarakatan (Lapas) Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} pada ${tanggal} bertempat di ${tempat}. Kegiatan tersebut dilaksanakan sebagai bentuk komitmen dalam meningkatkan pelaksanaan tugas dan fungsi pemasyarakatan di lingkungan Lapas.
+
+Dalam pelaksanaannya, kegiatan berlangsung dengan tertib dan lancar. Petugas terlebih dahulu melakukan persiapan dan koordinasi guna memastikan seluruh rangkaian kegiatan dapat berjalan sesuai prosedur dan ketentuan yang berlaku. Pengawasan dan monitoring juga dilakukan secara langsung oleh petugas selama kegiatan berlangsung.
+
+${uraian} Kegiatan ini juga menjadi bagian dari upaya meningkatkan efektivitas pelaksanaan tugas, memperkuat koordinasi antar petugas, serta menjaga situasi keamanan dan ketertiban di lingkungan Lapas Kelas IIB Arga Makmur.
+
+Selain itu, kegiatan tersebut diharapkan mampu memberikan dampak positif terhadap peningkatan kualitas pelayanan, pembinaan, maupun pengawasan di lingkungan pemasyarakatan. Seluruh peserta kegiatan juga mengikuti rangkaian kegiatan dengan tertib dan penuh tanggung jawab.
+
+Melalui kegiatan ini, Lapas Kelas IIB Arga Makmur terus menunjukkan komitmennya dalam mendukung pelaksanaan tugas pemasyarakatan yang profesional, akuntabel, dan berorientasi pada pelayanan yang optimal. Selama kegiatan berlangsung, situasi terpantau aman, tertib, lancar, dan kondusif hingga kegiatan selesai dilaksanakan.
+`;
+
+}
+
 function generateLaporan(){
 
     const judul = document.getElementById("judul").value;
@@ -279,7 +416,7 @@ function generateLaporan(){
     const peserta = document.getElementById("peserta").value;
     const uraian = document.getElementById("uraian").value;
 
-    const hasil = `
+    const laporan = `
 LAPORAN ATENSI PIMPINAN
 
 Kepada Yth.
@@ -308,14 +445,20 @@ ${peserta}
 
 IV. URAIAN KEGIATAN
 
-Pada kegiatan ${judul}, petugas melaksanakan kegiatan di ${tempat} sebagai bentuk pelaksanaan tugas dan fungsi pemasyarakatan.
-
-${uraian}
-
-Kegiatan berlangsung dengan aman, tertib, dan kondusif.
+${generateUraian(judul, tempat, uraian)}
 
 
-V. PENUTUP
+V. SARAN DAN TINDAK LANJUT
+
+${generateSaran(judul)}
+
+
+VI. KESIMPULAN
+
+Kegiatan ${judul} berjalan dengan aman, tertib, lancar, dan kondusif serta menjadi bagian dari komitmen Lapas Kelas IIB Arga Makmur dalam meningkatkan kualitas pelaksanaan tugas dan fungsi pemasyarakatan.
+
+
+VII. PENUTUP
 
 Demikian laporan atensi ini disampaikan. Atas perhatian dan perkenannya diucapkan terima kasih.
 
@@ -328,26 +471,17 @@ Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
 YULIAN FERNANDO
 
 
+==========================================================
 
-======================================================
 
 NARASI BERITA
 
-${judul}
-
-Arga Makmur — Lapas Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} pada ${tanggal} bertempat di ${tempat}.
-
-${uraian}
-
-Kegiatan berlangsung dengan aman, tertib, dan lancar serta menjadi bentuk komitmen dalam meningkatkan kualitas pelaksanaan tugas dan fungsi pemasyarakatan.
-
+${generateNarasi(judul, tanggal, tempat, uraian)}
 `;
 
-    document.getElementById("hasil").innerText = hasil;
+    document.getElementById("hasil").innerText = laporan;
 
 }
-
-    <!-- TAMBAHKAN SCRIPT INI PALING BAWAH SEBELUM </script> -->
 
 function copyLaporan(){
 
@@ -374,9 +508,8 @@ function downloadTXT(){
     a.click();
 
 }
+
 </script>
 
 </body>
 </html>
-
-
