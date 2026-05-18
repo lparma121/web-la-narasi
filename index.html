@@ -164,8 +164,13 @@ button:hover{
 
 .btn-group{
     display:flex;
+    flex-wrap:wrap;
     gap:10px;
     margin-top:20px;
+}
+
+.btn-group button{
+    flex:1;
 }
 
 @media(max-width:900px){
@@ -222,7 +227,7 @@ button:hover{
     <div class="preview">
 
         <!-- FRAME -->
-        <div class="frame">
+        <div class="frame" id="frameArea">
 
             <!-- GANTI DENGAN FILE FRAME KAMU -->
             <img src="format.png" class="bg">
@@ -247,11 +252,18 @@ Hasil laporan akan muncul di sini...
                 Download TXT
             </button>
 
+            <button class="download-btn" onclick="downloadFrame()">
+                Download Gambar
+            </button>
+
         </div>
 
     </div>
 
 </div>
+
+<!-- HTML2CANVAS -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
 
@@ -509,6 +521,24 @@ function downloadTXT(){
     link.click();
 
     document.body.removeChild(link);
+
+}
+
+function downloadFrame(){
+
+    const frame = document.getElementById("frameArea");
+
+    html2canvas(frame).then(canvas => {
+
+        const link = document.createElement("a");
+
+        link.download = "frame-laporan.png";
+
+        link.href = canvas.toDataURL("image/png");
+
+        link.click();
+
+    });
 
 }
 
