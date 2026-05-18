@@ -347,7 +347,36 @@ Kegiatan berlangsung dengan aman, tertib, dan lancar serta menjadi bentuk komitm
 
 }
 
+    <!-- TAMBAHKAN SCRIPT INI PALING BAWAH SEBELUM </script> -->
+
+function copyLaporan(){
+
+    const text = document.getElementById("hasil").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Laporan berhasil dicopy!");
+
+}
+
+function downloadTXT(){
+
+    const text = document.getElementById("hasil").innerText;
+
+    const blob = new Blob([text], {type:"text/plain"});
+
+    const a = document.createElement("a");
+
+    a.href = URL.createObjectURL(blob);
+
+    a.download = "laporan-atensi.txt";
+
+    a.click();
+
+}
 </script>
 
 </body>
 </html>
+
+
