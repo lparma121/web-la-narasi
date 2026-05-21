@@ -38,6 +38,8 @@ body{
 h1{
     margin-bottom:20px;
     color:#0f172a;
+    font-size:48px;
+    font-weight:900;
 }
 
 label{
@@ -45,20 +47,21 @@ label{
     margin-top:15px;
     margin-bottom:8px;
     font-weight:bold;
+    font-size:16px;
 }
 
 input,
 textarea,
 select{
     width:100%;
-    padding:12px;
-    border-radius:8px;
+    padding:14px;
+    border-radius:10px;
     border:1px solid #cbd5e1;
-    font-size:14px;
+    font-size:15px;
 }
 
 textarea{
-    min-height:100px;
+    min-height:120px;
     resize:vertical;
 }
 
@@ -71,11 +74,6 @@ button{
     color:white;
     font-size:15px;
     cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    opacity:0.9;
 }
 
 .generate-btn{
@@ -128,7 +126,6 @@ button:hover{
     object-fit:cover;
     border-radius:12px;
     border:4px solid white;
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 
 .one img{
@@ -158,13 +155,26 @@ button:hover{
 
 .output{
     margin-top:30px;
-    line-height:1.8;
-    font-size:16px;
+    line-height:1.9;
+    font-size:17px;
+}
+
+.bold-title{
+    font-weight:900;
+    font-size:28px;
+}
+
+.bold-sub{
+    font-weight:900;
+    font-size:22px;
+}
+
+.bold-name{
+    font-weight:900;
 }
 
 .btn-group{
     display:flex;
-    flex-wrap:wrap;
     gap:10px;
     margin-top:20px;
 }
@@ -175,13 +185,13 @@ button:hover{
 
 @media(max-width:900px){
 
-    .container{
-        grid-template-columns:1fr;
-    }
+.container{
+    grid-template-columns:1fr;
+}
 
-    .btn-group{
-        flex-direction:column;
-    }
+.btn-group{
+    flex-direction:column;
+}
 
 }
 
@@ -191,104 +201,102 @@ button:hover{
 
 <div class="container">
 
-    <!-- FORM -->
-    <div class="card">
+<!-- FORM -->
+<div class="card">
 
-        <h1>Generator Laporan Atensi</h1>
+<h1>Generator Laporan Atensi</h1>
 
-        <label>Kepada Yth.</label>
+<label>Kepada Yth.</label>
 
-        <select id="kepada">
+<select id="kepada">
 
-            <option value="Menteri Imigrasi dan Pemasyarakatan">
-                Menteri Imigrasi dan Pemasyarakatan
-            </option>
+<option value="Menteri Imigrasi dan Pemasyarakatan">
+Menteri Imigrasi dan Pemasyarakatan
+</option>
 
-            <option value="Direktur Jenderal Pemasyarakatan">
-                Direktur Jenderal Pemasyarakatan
-            </option>
+<option value="Direktur Jenderal Pemasyarakatan">
+Direktur Jenderal Pemasyarakatan
+</option>
 
-            <option value="Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan">
-                Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan
-            </option>
+<option value="Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan">
+Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan
+</option>
 
-            <option value="Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan">
-                Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan
-            </option>
+<option value="Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan">
+Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan
+</option>
 
-            <option selected value="Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu">
-                Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
-            </option>
+<option selected value="Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu">
+Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
+</option>
 
-        </select>
+</select>
 
-        <label>Judul Kegiatan</label>
-        <textarea id="judul"></textarea>
+<label>Judul Kegiatan</label>
+<textarea id="judul"></textarea>
 
-        <label>Tanggal</label>
-        <input type="text" id="tanggal">
+<label>Tanggal</label>
+<input type="text" id="tanggal" placeholder="Rabu, 13 Mei 2026">
 
-        <label>Pukul</label>
-        <input type="text" id="pukul">
+<label>Pukul</label>
+<input type="text" id="pukul" placeholder="09.00 WIB s.d selesai">
 
-        <label>Tempat</label>
-        <input type="text" id="tempat">
+<label>Tempat</label>
+<input type="text" id="tempat">
 
-        <label>Peserta Kegiatan</label>
-        <textarea id="peserta"></textarea>
+<label>Peserta Kegiatan</label>
+<textarea id="peserta"></textarea>
 
-        <label>Uraian Singkat</label>
-        <textarea id="uraian"></textarea>
+<label>Uraian Singkat</label>
+<textarea id="uraian"></textarea>
 
-        <label>Upload Foto</label>
-        <input type="file" id="fotoInput" multiple accept="image/*">
+<label>Upload Foto</label>
+<input type="file" id="fotoInput" multiple accept="image/*">
 
-        <button class="generate-btn" onclick="generateLaporan()">
-            Generate Laporan
-        </button>
-
-    </div>
-
-    <!-- PREVIEW -->
-    <div class="preview">
-
-        <!-- FRAME -->
-        <div class="frame" id="frameArea">
-
-            <!-- GANTI DENGAN FILE FRAME KAMU -->
-            <img src="frame.png" class="bg">
-
-            <div class="photo-container" id="photoContainer"></div>
-
-        </div>
-
-        <!-- HASIL -->
-        <div class="output" id="hasil">
-Hasil laporan akan muncul di sini...
-        </div>
-
-        <!-- BUTTON -->
-        <div class="btn-group">
-
-            <button class="copy-btn" onclick="copyLaporan()">
-                Copy Laporan
-            </button>
-
-            <button class="download-btn" onclick="downloadTXT()">
-                Download TXT
-            </button>
-
-            <button class="download-btn" onclick="downloadFrame()">
-                Download Gambar
-            </button>
-
-        </div>
-
-    </div>
+<button class="generate-btn" onclick="generateLaporan()">
+Generate Laporan
+</button>
 
 </div>
 
-<!-- HTML2CANVAS -->
+<!-- PREVIEW -->
+<div class="preview">
+
+<!-- FRAME -->
+<div class="frame" id="frameArea">
+
+<!-- GANTI MENJADI NAMA FILE BINGKAI -->
+<img src="frame.png" class="bg">
+
+<div class="photo-container" id="photoContainer"></div>
+
+</div>
+
+<!-- HASIL -->
+<div class="output" id="hasil">
+Hasil laporan akan muncul di sini...
+</div>
+
+<div class="btn-group">
+
+<button class="copy-btn" onclick="copyLaporan()">
+Copy Laporan
+</button>
+
+<button class="download-btn" onclick="downloadTXT()">
+Download TXT
+</button>
+
+<button class="download-btn" onclick="downloadFrame()">
+Download Gambar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
@@ -298,65 +306,65 @@ const photoContainer = document.getElementById("photoContainer");
 
 fotoInput.addEventListener("change", function(){
 
-    photoContainer.innerHTML = "";
+photoContainer.innerHTML = "";
 
-    const files = this.files;
+const files = this.files;
 
-    photoContainer.className = "photo-container";
+photoContainer.className = "photo-container";
 
-    if(files.length == 1){
-        photoContainer.classList.add("one");
-    }
+if(files.length == 1){
+photoContainer.classList.add("one");
+}
 
-    else if(files.length == 2){
-        photoContainer.classList.add("two");
-    }
+else if(files.length == 2){
+photoContainer.classList.add("two");
+}
 
-    else if(files.length == 3){
-        photoContainer.classList.add("three");
-    }
+else if(files.length == 3){
+photoContainer.classList.add("three");
+}
 
-    else if(files.length == 4){
-        photoContainer.classList.add("four");
-    }
+else if(files.length == 4){
+photoContainer.classList.add("four");
+}
 
-    else{
-        photoContainer.classList.add("five");
-    }
+else{
+photoContainer.classList.add("five");
+}
 
-    Array.from(files).forEach(file => {
+Array.from(files).forEach(file => {
 
-        const reader = new FileReader();
+const reader = new FileReader();
 
-        reader.onload = function(e){
+reader.onload = function(e){
 
-            const img = document.createElement("img");
+const img = document.createElement("img");
 
-            img.src = e.target.result;
+img.src = e.target.result;
 
-            photoContainer.appendChild(img);
+photoContainer.appendChild(img);
 
-        }
+}
 
-        reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
-    });
+});
 
 });
 
 function generateSaran(judul){
 
-    const text = judul.toLowerCase();
+const text = judul.toLowerCase();
 
-    if(
-        text.includes("kontrol") ||
-        text.includes("pengamanan") ||
-        text.includes("razia") ||
-        text.includes("blok") ||
-        text.includes("dapur")
-    ){
+if(
+text.includes("kontrol") ||
+text.includes("pengamanan") ||
+text.includes("razia") ||
+text.includes("blok") ||
+text.includes("dapur")
+){
 
-        return `
+return `
 1. Meningkatkan intensitas kontrol dan monitoring area kegiatan secara rutin;<br>
 2. Memperkuat pengawasan dan deteksi dini terhadap potensi gangguan keamanan dan ketertiban;<br>
 3. Meningkatkan koordinasi antar petugas dalam pelaksanaan tugas pengamanan dan pengawasan;<br>
@@ -365,9 +373,9 @@ function generateSaran(judul){
 6. Mohon arahan dan petunjuk lebih lanjut.
 `;
 
-    }
+}
 
-    return `
+return `
 1. Meningkatkan koordinasi dan komunikasi antar petugas dalam pelaksanaan kegiatan;<br>
 2. Mengoptimalkan pengawasan dan monitoring terhadap pelaksanaan kegiatan secara berkala;<br>
 3. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan tugas;<br>
@@ -377,9 +385,78 @@ function generateSaran(judul){
 
 }
 
-function generateUraian(judul, tempat, uraian){
+function generateLaporan(){
 
-    return `
+const kepada = document.getElementById("kepada").value;
+const judul = document.getElementById("judul").value;
+const tanggal = document.getElementById("tanggal").value;
+const pukul = document.getElementById("pukul").value;
+const tempat = document.getElementById("tempat").value;
+const peserta = document.getElementById("peserta").value;
+const uraian = document.getElementById("uraian").value;
+
+const laporan = `
+
+<div class="bold-title">
+LAPORAN ATENSI PIMPINAN
+</div>
+
+<br>
+
+Kepada Yth.<br>
+
+<div class="bold-name">
+${kepada}
+</div>
+
+<br>
+
+Dari :<br>
+
+<div class="bold-name">
+Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
+</div>
+
+<br><br>
+
+<div class="bold-sub">
+I. KEGIATAN
+</div>
+
+<br>
+
+${judul}
+
+<br><br>
+
+<div class="bold-sub">
+II. WAKTU KEGIATAN
+</div>
+
+<br>
+
+Hari/Tanggal : ${tanggal}<br>
+Pukul : ${pukul}<br>
+Tempat : ${tempat}
+
+<br><br>
+
+<div class="bold-sub">
+III. PESERTA KEGIATAN
+</div>
+
+<br>
+
+${peserta}
+
+<br><br>
+
+<div class="bold-sub">
+IV. URAIAN KEGIATAN
+</div>
+
+<br>
+
 <p>
 Pada hari pelaksanaan kegiatan, petugas Lapas Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} yang bertempat di ${tempat}. Kegiatan tersebut dilaksanakan sebagai bentuk pelaksanaan tugas dan fungsi pemasyarakatan dalam rangka meningkatkan kualitas pelayanan, pengawasan, serta pembinaan di lingkungan Lapas.
 </p>
@@ -401,149 +478,38 @@ ${uraian} Selain itu, kegiatan ini juga menjadi bagian dari upaya peningkatan ke
 <p>
 Selama kegiatan berlangsung, seluruh peserta mengikuti rangkaian kegiatan dengan tertib dan penuh tanggung jawab. Situasi selama kegiatan terpantau aman, lancar, tertib, dan kondusif hingga kegiatan selesai dilaksanakan.
 </p>
-`;
-
-}
-
-function generateNarasi(judul, tanggal, tempat, uraian){
-
-    return `
-<strong style="font-size:22px;">
-${judul}
-</strong>
 
 <br><br>
 
-<p>
-Arga Makmur — Lembaga Pemasyarakatan (Lapas) Kelas IIB Arga Makmur melaksanakan kegiatan ${judul} pada ${tanggal} bertempat di ${tempat}. Kegiatan tersebut dilaksanakan sebagai bentuk komitmen dalam meningkatkan pelaksanaan tugas dan fungsi pemasyarakatan di lingkungan Lapas.
-</p>
-
-<br>
-
-<p>
-Dalam pelaksanaannya, kegiatan berlangsung dengan tertib dan lancar. Petugas terlebih dahulu melakukan persiapan dan koordinasi guna memastikan seluruh rangkaian kegiatan dapat berjalan sesuai prosedur dan ketentuan yang berlaku. Pengawasan dan monitoring juga dilakukan secara langsung oleh petugas selama kegiatan berlangsung.
-</p>
-
-<br>
-
-<p>
-${uraian} Kegiatan ini juga menjadi bagian dari upaya meningkatkan efektivitas pelaksanaan tugas, memperkuat koordinasi antar petugas, serta menjaga situasi keamanan dan ketertiban di lingkungan Lapas Kelas IIB Arga Makmur.
-</p>
-
-<br>
-
-<p>
-Selain itu, kegiatan tersebut diharapkan mampu memberikan dampak positif terhadap peningkatan kualitas pelayanan, pembinaan, maupun pengawasan di lingkungan pemasyarakatan. Seluruh peserta kegiatan juga mengikuti rangkaian kegiatan dengan tertib dan penuh tanggung jawab.
-</p>
-
-<br>
-
-<p>
-Melalui kegiatan ini, Lapas Kelas IIB Arga Makmur terus menunjukkan komitmennya dalam mendukung pelaksanaan tugas pemasyarakatan yang profesional, akuntabel, dan berorientasi pada pelayanan yang optimal. Selama kegiatan berlangsung, situasi terpantau aman, tertib, lancar, dan kondusif hingga kegiatan selesai dilaksanakan.
-</p>
-`;
-
-}
-
-function generateLaporan(){
-
-    const kepada = document.getElementById("kepada").value;
-    const judul = document.getElementById("judul").value;
-    const tanggal = document.getElementById("tanggal").value;
-    const pukul = document.getElementById("pukul").value;
-    const tempat = document.getElementById("tempat").value;
-    const peserta = document.getElementById("peserta").value;
-    const uraian = document.getElementById("uraian").value;
-
-    const laporan = `
-
-<strong style="font-size:24px;">
-LAPORAN ATENSI PIMPINAN
-</strong>
-
-<br><br>
-
-Kepada Yth.<br>
-<strong>${kepada}</strong>
-
-<br><br>
-
-Dari :<br>
-<strong>Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur</strong>
-
-<br><br><br>
-
-<strong style="font-size:22px;">
-I. KEGIATAN
-</strong>
-
-<br><br>
-
-${judul}
-
-<br><br><br>
-
-<strong style="font-size:22px;">
-II. WAKTU KEGIATAN
-</strong>
-
-<br><br>
-
-Hari/Tanggal : ${tanggal}<br>
-Pukul : ${pukul}<br>
-Tempat : ${tempat}
-
-<br><br><br>
-
-<strong style="font-size:22px;">
-III. PESERTA KEGIATAN
-</strong>
-
-<br><br>
-
-${peserta}
-
-<br><br><br>
-
-<strong style="font-size:22px;">
-IV. URAIAN KEGIATAN
-</strong>
-
-<br><br>
-
-${generateUraian(judul, tempat, uraian)}
-
-<br><br><br>
-
-<strong style="font-size:22px;">
+<div class="bold-sub">
 V. SARAN DAN TINDAK LANJUT
-</strong>
+</div>
 
-<br><br>
+<br>
 
 ${generateSaran(judul)}
 
-<br><br><br>
-
-<strong style="font-size:22px;">
-VI. KESIMPULAN
-</strong>
-
 <br><br>
+
+<div class="bold-sub">
+VI. KESIMPULAN
+</div>
+
+<br>
 
 Kegiatan ${judul} berjalan dengan aman, tertib, lancar, dan kondusif serta menjadi bagian dari komitmen Lapas Kelas IIB Arga Makmur dalam meningkatkan kualitas pelaksanaan tugas dan fungsi pemasyarakatan.
 
-<br><br><br>
-
-<strong style="font-size:22px;">
-VII. PENUTUP
-</strong>
-
 <br><br>
+
+<div class="bold-sub">
+VII. PENUTUP
+</div>
+
+<br>
 
 Demikian laporan atensi ini disampaikan. Atas perhatian dan perkenannya diucapkan terima kasih.
 
-<br><br><br>
+<br><br>
 
 Arga Makmur, ${tanggal}
 
@@ -551,75 +517,65 @@ Arga Makmur, ${tanggal}
 
 Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
 
-<br><br><br>
-
-<strong style="font-size:22px;">
-YULIAN FERNANDO
-</strong>
-
-<br><br><hr><br><br>
-
-<strong style="font-size:24px;">
-NARASI BERITA
-</strong>
-
 <br><br>
 
-${generateNarasi(judul, tanggal, tempat, uraian)}
+<div class="bold-name">
+YULIAN FERNANDO
+</div>
 
 `;
 
-    document.getElementById("hasil").innerHTML = laporan;
+document.getElementById("hasil").innerHTML = laporan;
 
 }
 
 function copyLaporan(){
 
-    const text = document.getElementById("hasil").innerText;
+const text = document.getElementById("hasil").innerText;
 
-    navigator.clipboard.writeText(text);
+navigator.clipboard.writeText(text);
 
-    alert("Laporan berhasil dicopy!");
+alert("Laporan berhasil dicopy!");
 
 }
 
 function downloadTXT(){
 
-    const text = document.getElementById("hasil").innerText;
+const text = document.getElementById("hasil").innerText;
 
-    const blob = new Blob([text], {
-        type:"text/plain"
-    });
+const blob = new Blob([text], {
+type:"text/plain"
+});
 
-    const link = document.createElement("a");
+const link = document.createElement("a");
 
-    link.href = URL.createObjectURL(blob);
+link.href = URL.createObjectURL(blob);
 
-    link.download = "laporan-atensi.txt";
+link.download = "laporan-atensi.txt";
 
-    document.body.appendChild(link);
+document.body.appendChild(link);
 
-    link.click();
+link.click();
 
-    document.body.removeChild(link);
+document.body.removeChild(link);
 
 }
 
 function downloadFrame(){
 
-    const frame = document.getElementById("frameArea");
+const frame = document.getElementById("frameArea");
 
-    html2canvas(frame).then(canvas => {
+html2canvas(frame).then(canvas => {
 
-        const link = document.createElement("a");
+const link = document.createElement("a");
 
-        link.download = "frame-laporan.png";
+link.download = "frame-laporan.png";
 
-        link.href = canvas.toDataURL("image/png");
+link.href = canvas.toDataURL("image/png");
 
-        link.click();
+link.click();
 
-    });
+});
 
 }
 
