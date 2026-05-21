@@ -158,13 +158,8 @@ button:hover{
 
 .output{
     margin-top:30px;
-    white-space:pre-wrap;
     line-height:1.8;
     font-size:16px;
-}
-
-.bold{
-    font-weight:bold;
 }
 
 .btn-group{
@@ -260,7 +255,7 @@ button:hover{
         <!-- FRAME -->
         <div class="frame" id="frameArea">
 
-            <!-- GANTI DENGAN NAMA FILE FRAME -->
+            <!-- GANTI DENGAN FILE FRAME KAMU -->
             <img src="frame.png" class="bg">
 
             <div class="photo-container" id="photoContainer"></div>
@@ -362,21 +357,21 @@ function generateSaran(judul){
     ){
 
         return `
-1. Meningkatkan intensitas kontrol dan monitoring area kegiatan secara rutin;
-2. Memperkuat pengawasan dan deteksi dini terhadap potensi gangguan keamanan dan ketertiban;
-3. Meningkatkan koordinasi antar petugas dalam pelaksanaan tugas pengamanan dan pengawasan;
-4. Memberikan pembinaan dan imbauan kepada warga binaan agar tetap menjaga ketertiban;
-5. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+1. Meningkatkan intensitas kontrol dan monitoring area kegiatan secara rutin;<br>
+2. Memperkuat pengawasan dan deteksi dini terhadap potensi gangguan keamanan dan ketertiban;<br>
+3. Meningkatkan koordinasi antar petugas dalam pelaksanaan tugas pengamanan dan pengawasan;<br>
+4. Memberikan pembinaan dan imbauan kepada warga binaan agar tetap menjaga ketertiban;<br>
+5. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;<br>
 6. Mohon arahan dan petunjuk lebih lanjut.
 `;
 
     }
 
     return `
-1. Meningkatkan koordinasi dan komunikasi antar petugas dalam pelaksanaan kegiatan;
-2. Mengoptimalkan pengawasan dan monitoring terhadap pelaksanaan kegiatan secara berkala;
-3. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan tugas;
-4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;
+1. Meningkatkan koordinasi dan komunikasi antar petugas dalam pelaksanaan kegiatan;<br>
+2. Mengoptimalkan pengawasan dan monitoring terhadap pelaksanaan kegiatan secara berkala;<br>
+3. Melaksanakan evaluasi terhadap hasil kegiatan guna meningkatkan efektivitas pelaksanaan tugas;<br>
+4. Melaporkan hasil kegiatan kepada Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu;<br>
 5. Mohon arahan dan petunjuk lebih lanjut.
 `;
 
@@ -413,7 +408,9 @@ Selama kegiatan berlangsung, seluruh peserta mengikuti rangkaian kegiatan dengan
 function generateNarasi(judul, tanggal, tempat, uraian){
 
     return `
-<b>${judul}</b>
+<strong style="font-size:22px;">
+${judul}
+</strong>
 
 <br><br>
 
@@ -460,77 +457,93 @@ function generateLaporan(){
 
     const laporan = `
 
-<div class="bold">LAPORAN ATENSI PIMPINAN</div>
-
-<br>
-
-Kepada Yth.<br>
-<div class="bold">${kepada}</div>
-
-<br>
-
-Dari :<br>
-<div class="bold">Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur</div>
+<strong style="font-size:24px;">
+LAPORAN ATENSI PIMPINAN
+</strong>
 
 <br><br>
 
-<div class="bold">I. KEGIATAN</div>
+Kepada Yth.<br>
+<strong>${kepada}</strong>
 
-<br>
+<br><br>
+
+Dari :<br>
+<strong>Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur</strong>
+
+<br><br><br>
+
+<strong style="font-size:22px;">
+I. KEGIATAN
+</strong>
+
+<br><br>
 
 ${judul}
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+II. WAKTU KEGIATAN
+</strong>
+
 <br><br>
-
-<div class="bold">II. WAKTU KEGIATAN</div>
-
-<br>
 
 Hari/Tanggal : ${tanggal}<br>
 Pukul : ${pukul}<br>
 Tempat : ${tempat}
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+III. PESERTA KEGIATAN
+</strong>
+
 <br><br>
-
-<div class="bold">III. PESERTA KEGIATAN</div>
-
-<br>
 
 ${peserta}
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+IV. URAIAN KEGIATAN
+</strong>
+
 <br><br>
-
-<div class="bold">IV. URAIAN KEGIATAN</div>
-
-<br>
 
 ${generateUraian(judul, tempat, uraian)}
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+V. SARAN DAN TINDAK LANJUT
+</strong>
+
 <br><br>
-
-<div class="bold">V. SARAN DAN TINDAK LANJUT</div>
-
-<br>
 
 ${generateSaran(judul)}
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+VI. KESIMPULAN
+</strong>
+
 <br><br>
-
-<div class="bold">VI. KESIMPULAN</div>
-
-<br>
 
 Kegiatan ${judul} berjalan dengan aman, tertib, lancar, dan kondusif serta menjadi bagian dari komitmen Lapas Kelas IIB Arga Makmur dalam meningkatkan kualitas pelaksanaan tugas dan fungsi pemasyarakatan.
 
+<br><br><br>
+
+<strong style="font-size:22px;">
+VII. PENUTUP
+</strong>
+
 <br><br>
-
-<div class="bold">VII. PENUTUP</div>
-
-<br>
 
 Demikian laporan atensi ini disampaikan. Atas perhatian dan perkenannya diucapkan terima kasih.
 
-<br><br>
+<br><br><br>
 
 Arga Makmur, ${tanggal}
 
@@ -538,13 +551,17 @@ Arga Makmur, ${tanggal}
 
 Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
 
-<br><br>
+<br><br><br>
 
-<div class="bold">YULIAN FERNANDO</div>
+<strong style="font-size:22px;">
+YULIAN FERNANDO
+</strong>
 
 <br><br><hr><br><br>
 
-<div class="bold">NARASI BERITA</div>
+<strong style="font-size:24px;">
+NARASI BERITA
+</strong>
 
 <br><br>
 
