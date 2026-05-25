@@ -38,7 +38,7 @@ body{
 h1{
     margin-bottom:20px;
     color:#0f172a;
-    font-size:48px;
+    font-size:42px;
     font-weight:900;
 }
 
@@ -266,7 +266,7 @@ Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
 <textarea id="judul"></textarea>
 
 <label>Tanggal</label>
-<input type="text" id="tanggal" placeholder="Rabu, 13 Mei 2026">
+<input type="date" id="tanggal">
 
 <label>Pukul</label>
 <input type="text" id="pukul" placeholder="09.00 WIB s.d selesai">
@@ -325,8 +325,8 @@ Generate Laporan
 
 <div class="frame" id="frameArea">
 
-<!-- GANTI FILE FRAME -->
-<img src="frame.png" class="bg">
+<!-- GANTI DENGAN FILE FRAME -->
+<img src="format.png" class="bg">
 
 <div class="photo-container" id="photoContainer"></div>
 
@@ -411,6 +411,44 @@ reader.readAsDataURL(file);
 
 });
 
+function formatTanggalIndonesia(tanggalInput){
+
+const hari = [
+"Minggu",
+"Senin",
+"Selasa",
+"Rabu",
+"Kamis",
+"Jumat",
+"Sabtu"
+];
+
+const bulan = [
+"Januari",
+"Februari",
+"Maret",
+"April",
+"Mei",
+"Juni",
+"Juli",
+"Agustus",
+"September",
+"Oktober",
+"November",
+"Desember"
+];
+
+const date = new Date(tanggalInput);
+
+const namaHari = hari[date.getDay()];
+const tgl = date.getDate();
+const namaBulan = bulan[date.getMonth()];
+const tahun = date.getFullYear();
+
+return `${namaHari}, ${tgl} ${namaBulan} ${tahun}`;
+
+}
+
 function generateSaran(judul){
 
 const text = judul.toLowerCase();
@@ -450,7 +488,13 @@ const kepada =
 document.querySelector('input[name="kepada"]:checked').value;
 
 const judul = document.getElementById("judul").value;
-const tanggal = document.getElementById("tanggal").value;
+
+const tanggalInput =
+document.getElementById("tanggal").value;
+
+const tanggal =
+formatTanggalIndonesia(tanggalInput);
+
 const pukul = document.getElementById("pukul").value;
 const tempat = document.getElementById("tempat").value;
 const uraian = document.getElementById("uraian").value;
