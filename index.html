@@ -51,8 +51,7 @@ label{
 }
 
 input,
-textarea,
-select{
+textarea{
     width:100%;
     padding:14px;
     border-radius:10px;
@@ -63,6 +62,25 @@ select{
 textarea{
     min-height:120px;
     resize:vertical;
+}
+
+.checkbox-group{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:10px;
+}
+
+.check-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:15px;
+    font-weight:500;
+}
+
+.check-item input{
+    width:auto;
 }
 
 button{
@@ -206,31 +224,43 @@ button{
 
 <h1>Generator Laporan Atensi</h1>
 
+<!-- KEPADA -->
 <label>Kepada Yth.</label>
 
-<select id="kepada">
+<div class="checkbox-group">
 
-<option value="Menteri Imigrasi dan Pemasyarakatan">
+<label class="check-item">
+<input type="radio" name="kepada"
+value="Menteri Imigrasi dan Pemasyarakatan">
 Menteri Imigrasi dan Pemasyarakatan
-</option>
+</label>
 
-<option value="Direktur Jenderal Pemasyarakatan">
+<label class="check-item">
+<input type="radio" name="kepada"
+value="Direktur Jenderal Pemasyarakatan">
 Direktur Jenderal Pemasyarakatan
-</option>
+</label>
 
-<option value="Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan">
+<label class="check-item">
+<input type="radio" name="kepada"
+value="Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan">
 Sekretaris Jenderal Kementerian Imigrasi dan Pemasyarakatan
-</option>
+</label>
 
-<option value="Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan">
+<label class="check-item">
+<input type="radio" name="kepada"
+value="Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan">
 Inspektur Jenderal Kementerian Imigrasi dan Pemasyarakatan
-</option>
+</label>
 
-<option selected value="Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu">
+<label class="check-item">
+<input type="radio" name="kepada"
+value="Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu"
+checked>
 Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
-</option>
+</label>
 
-</select>
+</div>
 
 <label>Judul Kegiatan</label>
 <textarea id="judul"></textarea>
@@ -244,8 +274,39 @@ Kepala Kantor Wilayah Direktorat Jenderal Pemasyarakatan Bengkulu
 <label>Tempat</label>
 <input type="text" id="tempat">
 
+<!-- PESERTA -->
 <label>Peserta Kegiatan</label>
-<textarea id="peserta"></textarea>
+
+<div class="checkbox-group">
+
+<label class="check-item">
+<input type="checkbox" class="peserta"
+value="Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur">
+Kepala Lembaga Pemasyarakatan Kelas IIB Arga Makmur
+</label>
+
+<label class="check-item">
+<input type="checkbox" class="peserta"
+value="Pejabat Eselon IV dan V">
+Pejabat Eselon IV dan V
+</label>
+
+<label class="check-item">
+<input type="checkbox" class="peserta"
+value="JFT/JFU">
+JFT/JFU
+</label>
+
+<label class="check-item">
+<input type="checkbox" id="lainnyaCheck">
+Lainnya
+</label>
+
+<input type="text"
+id="pesertaLainnya"
+placeholder="Ketik peserta lainnya">
+
+</div>
 
 <label>Uraian Singkat</label>
 <textarea id="uraian"></textarea>
@@ -262,17 +323,15 @@ Generate Laporan
 <!-- PREVIEW -->
 <div class="preview">
 
-<!-- FRAME -->
 <div class="frame" id="frameArea">
 
-<!-- GANTI MENJADI NAMA FILE BINGKAI -->
-<img src="format.png" class="bg">
+<!-- GANTI FILE FRAME -->
+<img src="frame.png" class="bg">
 
 <div class="photo-container" id="photoContainer"></div>
 
 </div>
 
-<!-- HASIL -->
 <div class="output" id="hasil">
 Hasil laporan akan muncul di sini...
 </div>
@@ -387,13 +446,45 @@ return `
 
 function generateLaporan(){
 
-const kepada = document.getElementById("kepada").value;
+const kepada =
+document.querySelector('input[name="kepada"]:checked').value;
+
 const judul = document.getElementById("judul").value;
 const tanggal = document.getElementById("tanggal").value;
 const pukul = document.getElementById("pukul").value;
 const tempat = document.getElementById("tempat").value;
-const peserta = document.getElementById("peserta").value;
 const uraian = document.getElementById("uraian").value;
+
+const pesertaCheckbox =
+document.querySelectorAll(".peserta");
+
+let peserta = "";
+
+let nomor = 1;
+
+pesertaCheckbox.forEach(item => {
+
+if(item.checked){
+
+peserta += `${nomor}. ${item.value}<br>`;
+
+nomor++;
+
+}
+
+});
+
+const lainnyaCheck =
+document.getElementById("lainnyaCheck");
+
+const pesertaLainnya =
+document.getElementById("pesertaLainnya").value;
+
+if(lainnyaCheck.checked && pesertaLainnya !== ""){
+
+peserta += `${nomor}. ${pesertaLainnya}`;
+
+}
 
 const laporan = `
 
